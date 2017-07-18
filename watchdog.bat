@@ -5,6 +5,7 @@ echo -------------------------------------------------------------------
 echo:
 set restartinseconds=3
 set /a counter=0
+set executable=ethminer.exe
 timeout 3
 setx GPU_FORCE_64BIT_PTR 0
 setx GPU_MAX_HEAP_SIZE 100
@@ -13,11 +14,11 @@ setx GPU_MAX_ALLOC_PERCENT 100
 setx GPU_SINGLE_ALLOC_PERCENT 100
 :start
 echo time() > output.log
-start "ETHMiner" mining.cmd
+start /b "ETHMiner" mining.cmd
 timeout 25 >nul
 :good
 timeout 10 >nul
-findstr "Error" output.log 
+findstr /i "error" output.log 
 if errorlevel 1 goto good
 taskkill /f /im %executable%
 echo Restarted %a% times. - 
