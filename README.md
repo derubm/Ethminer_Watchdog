@@ -5,7 +5,7 @@ ________________________________________________________________________________
 
 Copy all Files into Ethminer Folder.
 
-Configure mining.cmd to your needs ( or just mine to my address :P )
+Configure mining.cmd, watchdog.bat to your needs ( or just mine to my address :P )
 
 start watchdog.bat
 
