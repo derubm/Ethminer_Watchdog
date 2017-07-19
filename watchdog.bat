@@ -6,7 +6,9 @@ ECHO 1 - ETH on Dwarf
 ECHO 2 - ETH on Nano
 ECHO 3 - ETC on Nano
 ECHO ...............................................
-::default Pool , 3 pools at the moment so 123, i fyou want mor or less, just change to something like C:12 or C:12345, D:1 stands for Default Pool 1
+:: maxmimum time the miner runs without automated restart (keeps log file small) 14400 is 4hours etc ...
+set /a maxtime=14400
+::default Pool , 3 pools at the moment so 123, i fyou want more or less, just change to something like C:12 or C:12345, D:1 stands for Default Pool 1
 CHOICE /N /C:123 /T 10 /D 1
 ::configure your Pools here
 IF %ERRORLEVEL% ==3 set runner=http://etc-eu1.nanopool.org:18888/0xeaaecd2c2d6b27e49fa3c29f5e3d49a7f17e3ea7/1/email@miner.com
@@ -32,7 +34,8 @@ timeout 25 >nul
 :good
 timeout 10 >nul														
 set /a timer+=10
-if %timer% gtr 14400 goto bad 										
+::Automatic restart in Seconds
+if %timer% gtr %maxtime% goto bad 										
 findstr /i "error" output.log 										
 if %ERRORLEVEL% ==1 goto good
 :bad
