@@ -1,21 +1,18 @@
 @echo off
-Color 07
+Color 0A
 ECHO.
 ECHO ...............................................
-ECHO 1 - ETH on Dwarf
-ECHO 2 - ETH on Nano
-ECHO 3 - ETC on Nano
+ECHO 1 - ETH on Dwarfpool
+ECHO 2 - ETH on Nanopool
+ECHO 3 - ETC on Nanopool
 ECHO ...............................................
-:: maxmimum time the miner runs without automated restart (keeps log file small) 14400 is 4hours etc ...
-set /a maxtime=14400
-::default Pool , 3 pools at the moment so 123, i fyou want more or less, just change to something like C:12 or C:12345, D:1 stands for Default Pool 1
-CHOICE /N /C:123 /T 10 /D 1
+::default Pool
+CHOICE /N /C:123 /T 3 /D 1
 ::configure your Pools here
-IF %ERRORLEVEL% ==3 set runner=http://etc-eu1.nanopool.org:18888/0xeaaecd2c2d6b27e49fa3c29f5e3d49a7f17e3ea7/1/email@miner.com
-IF %ERRORLEVEL% ==2 set runner=http://eth-eu1.nanopool.org:8888/0x762c924a469f21a446529bd8f6b07db6bde124bf/1/email@miner.com
-IF %ERRORLEVEL% ==1 set runner=http://eth-eu.dwarfpool.com:80/0x762c924a469f21a446529bd8f6b07db6bde124bf/GTX1060/email@miner.com
-::end configuration
-color 1B
+IF %ERRORLEVEL% ==3 set runner=http://etc-eu1.nanopool.org:18888/0xeaaecd2c2d6b27e49fa3c29f5e3d49a7f17e3ea7/1/dwarf@miner.com
+IF %ERRORLEVEL% ==2 set runner=http://eth-eu1.nanopool.org:8888/0x762c924a469f21a446529bd8f6b07db6bde124bf/1/dwarf@miner.com
+IF %ERRORLEVEL% ==1 set runner=http://eth-eu.dwarfpool.com:80/0x762c924a469f21a446529bd8f6b07db6bde124bf/GTX1060/dwarf@miner.com
+
 set restartinseconds=5
 set executable=ethminer.exe
 setx GPU_FORCE_64BIT_PTR 0
@@ -25,17 +22,17 @@ setx GPU_MAX_ALLOC_PERCENT 100
 setx GPU_SINGLE_ALLOC_PERCENT 100
 CLS
 :start
-color 1B
 set /a timer=0
 echo %time% > output.log
 ::start miner, pass pool to miner
-start /b "ETHMiner" mining.cmd %runner%										
+start /b "ETHMiner" mining.cmd %runner%		
+COLOR 09								
 timeout 25 >nul														
 :good
-timeout 10 >nul														
+choice /C:üx /N /T:10 /D ü >nul
+IF %ERRORLEVEL% == 2 GOTO bad
 set /a timer+=10
-::Automatic restart in Seconds
-if %timer% gtr %maxtime% goto bad 										
+if %timer% gtr 14400 goto bad 										
 findstr /i "error" output.log 										
 if %ERRORLEVEL% ==1 goto good
 :bad
