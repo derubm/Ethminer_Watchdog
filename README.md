@@ -10,8 +10,11 @@ Configure mining.cmd, watchdog.bat to your needs ( or just mine to my address :P
 start watchdog.bat
 
 keypress in mining process:
+
 "X": restarts on current pool, creates a new DAG
+
 "R": restarts Batchfile, you can choose a new pool.
+
 
 Tipps: set -v 1 to get smallest output ( speed is not shown in this minimalistic output, but corretly transfered to pool )
 
