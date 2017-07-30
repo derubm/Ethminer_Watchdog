@@ -30,3 +30,5 @@ Tips: Eth 0x762c924a469f21a446529bd8f6b07db6bde124bf
 changelog:
 1.6 : added correct stratum settings for ethermine.org ( see sample 5)
       you can now seamingless change between geth and stratum. ( stratum tested on ethermine.org )
+      
+1.7:  added colored output, stats (shares, time per session) - updates every minute. colors should only work on Windows 10 
