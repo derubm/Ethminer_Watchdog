@@ -32,5 +32,5 @@ changelog:
       you can now seamingless change between geth and stratum. ( stratum tested on ethermine.org )
       
 1.7:  added colored output, stats (shares, time per session) - updates every minute. colors should only work on Windows 10 
-      IMPORTANT: This release contains character hex27, that is needed for the colored output, when editing, make sure you use a editor 
-      which supports ANSI Char 27 ( ESC charracter) notepad++ does that for example.
+      IMPORTANT: This release contains character hex1B, that is needed for the colored output, when editing, make sure you use a editor 
+      which supports ANSI Char HEX 1B ( ESC character ) notepad++ does that for example.
