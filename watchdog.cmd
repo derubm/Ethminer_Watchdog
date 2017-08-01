@@ -17,7 +17,7 @@ chcp 65001
 		CHOICE /N /C:12345 /T 8 /D 1
 		::configure your Pools here
 		::type 1: geth, 2: stratum
-		::for stratum you need to specify a user and worker ( see sample 5)
+		::for stratum you need to specify a adress and worker ( see sample 5)
 		IF %ERRORLEVEL% ==1 (		set type="1" 
 						set runner="http://eth-eu.dwarfpool.com:80/0x762c924a469f21a446529bd8f6b07db6bde124bf/GTX1060/yourmail@adress.com" )
 		IF %ERRORLEVEL% ==2 (		set type="1" 
