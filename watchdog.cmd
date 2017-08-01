@@ -23,7 +23,7 @@ chcp 65001
 		IF %ERRORLEVEL% ==2 (		set type="1" 
 						set runner="http://127.0.0.1:8080/GTX1060/yourmail@adress.com" )
 		IF %ERRORLEVEL% ==3 (		set type="1" 
-						set runner="http://127.0.0.1:8545")
+						set runner="http://etc-eu1.nanopool.org:18888/0xeaaecd2c2d6b27e49fa3c29f5e3d49a7f17e3ea7/1/yourmail@adress.com")
 		IF %ERRORLEVEL% ==4 (		set type="1" 
 						set runner="http://eth-eu1.nanopool.org:8888/0x762c924a469f21a446529bd8f6b07db6bde124bf/GTX1060/yourmail@adress.com")
 		IF %ERRORLEVEL% ==5 (		set type="2" 
@@ -53,7 +53,7 @@ CLS
 	COLOR 0B
 	timeout 25 >nul														
 :good
-		choice /C:üxr /N /T:10 /D ü >nul
+		choice /C:Ã¼xr /N /T:10 /D Ã¼ >nul
 		IF %ERRORLEVEL% == 2 GOTO bad
 		IF %ERRORLEVEL% == 3 GOTO bad2
 		set /a timer+=10
