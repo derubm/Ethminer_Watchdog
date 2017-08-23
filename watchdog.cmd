@@ -14,6 +14,7 @@ chcp 65001
 ::default Pool
 		set /a timetaken=0
 		set user = " "
+::set Default (Autostart) Pool here ( /D [1-5] )		
 		CHOICE /N /C:12345 /T 8 /D 1
 		::configure your Pools here
 		::type 1: geth, 2: stratum
