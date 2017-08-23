@@ -32,7 +32,8 @@ chcp 65001
 :: restart miner every 8 hours (28800 seconds)
 		set /a restartintervall=28800
 		set restartinseconds=5
-		set executable=ethminer.exe
+		set /a badconnection=0
+		
 		setx GPU_FORCE_64BIT_PTR 0
 		setx GPU_MAX_HEAP_SIZE 100
 		setx GPU_USE_SYNC_OBJECTS 1
@@ -72,9 +73,17 @@ CLS
 		echo [1;33m I:  %time% :      [1;32m***%NUM% Shares found ***[1;33m   (%hours% %minute% minutes.)*** [1;36m 
 		set /a status = 0
 :cont		
-		if %timer% gtr %restartintervall% goto bad 										
+		if %timer% gtr %restartintervall% goto bad 
+::check if we are still connected in logfile	
+		findstr /i "could not connect" output.log
+		if %ERRORLEVEL% == 1 goto checkmore
+		set badconnection +=1
+:: after 10 fails restart miner and go to pool #1
+		if badconnection gtr 10 goto bad2
+:checkmore	
+::check if there are "error" or "exception" messages in the logfile									
 		findstr /i "error exception" output.log 
-	if %ERRORLEVEL% ==1 goto good
+		if %ERRORLEVEL% ==1 goto good
 :bad
 		taskkill /f /im %executable%
 		echo Restarting Miner in %restartinseconds% seconds (%counter%)
@@ -82,6 +91,7 @@ CLS
 	goto start
 :bad2
 	taskkill /f /im %executable%
+	set /a badconnection = 0
 	echo Restarting Miner in %restartinseconds% seconds (%counter%)
 	timeout %restartinseconds%
 	CLS
